@@ -12,13 +12,13 @@ const api = axios.create({
 });
 
 api.interceptors.request.use(
-  async function () {
+  async function (config) {
     const token = await getToken();
     if (token) {
-      configs.header["Authorization"] = token;
+      config.headers["Authorization"] = token;
     }
 
-    return configs;
+    return config;
   },
   function (error) {
     console.log("Request error: ", error);
